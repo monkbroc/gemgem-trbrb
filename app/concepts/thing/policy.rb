@@ -18,7 +18,9 @@ class Thing::Policy
   end
 
   def edit?
-    signed_in? and (admin? or model.users.include?(user))
+    return false unless signed_in?
+    return true if admin?
+    model.users.include?(user)
   end
 
   def delete?
